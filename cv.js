@@ -1,3 +1,4 @@
+//Flags for gestures
 const FLAG_NONE =			0;
 const FLAG_ORIENT_LEFT = 	1;
 const FLAG_ORIENT_RIGHT =	2;
@@ -5,6 +6,7 @@ const FLAG_ROT_LEFT =		1;
 const FLAG_ROT_RIGHT =		2;
 const FLAG_PUSH =			1;
 
+//Function to convert 360-100-100 HSV to 180-255-255 HSV
 function normalize_raw_hsv(h, s, v)
 {
     var normVals = [h,s,v, 0];
@@ -13,6 +15,8 @@ function normalize_raw_hsv(h, s, v)
     normVals[2] = v * (255.0 / 100.0);
     return normVals;
 }
+
+//Function that converts a rect to a bounds struct
 function make_bounds(x,y,w,h)
 {
     return [
@@ -20,22 +24,28 @@ function make_bounds(x,y,w,h)
         x+w,y+h
     ];
 }
+
+//Function that returns the x-coord of a bounds struct
 function bounds_x(bounds)
 {
     return bounds[0];
 }
+//Function that returns the y-coord of a bounds struct
 function bounds_y(bounds)
 {
     return bounds[1];
 }
+//Function that returns the width of a bounds struct
 function bounds_width(bounds)
 {
     return  bounds[2] - bounds[0];
 }
+//Function that returns the height of a bounds struct
 function bounds_height(bounds)
 {
     return bounds[3] - bounds[1];
 }
+//Function that returns the center [x, y] of a bounds struct
 function bounds_center(bounds)
 {
     return [
@@ -43,6 +53,7 @@ function bounds_center(bounds)
         Math.trunc((bounds[1] + bounds[3])/2)
     ]
 }
+//Function that gets rotation flags between two states of a bounds
 function get_bounds_rotation(current, old)
 {
     deltaXMin = current[0] - old[0];
@@ -68,6 +79,7 @@ function get_bounds_rotation(current, old)
 
     return FLAG_NONE;
 }
+//Function that creates a bounds struct corresponding to a hand-like object in an image
 function find_hand(image)
 {
 	var imgHSV = new cv.Mat();
@@ -121,6 +133,6 @@ function find_hand(image)
 	imgHSV.delete();
 	contours.delete();
 	harch.delete();
-  mask.delete();
+	mask.delete();
 	return null;
 }
