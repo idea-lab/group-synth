@@ -34,7 +34,7 @@ function doStuff() {
 Gibber.init()
   firebase.database().ref('session92103/startTime').set(Math.floor(new Date().getTime())+5000);
   onStart();
-  $("#instructions").text("move your mouse");
+  $("#instructions").text("move your hand");
   handPos = {x: -1, y: -1};
   // mousePos.x = -1;
   // mousePos.y = -1;
