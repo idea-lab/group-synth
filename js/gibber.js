@@ -1,5 +1,5 @@
-document.getElementById('body').addEventListener('click', function(){
 Gibber.init()
+document.getElementById('body').addEventListener('click', function(){
   onStart();
   $("#instructions").text("move your mouse");
   c = Sine(879, 0.78);
