@@ -1,157 +1,44 @@
-body,html {
-	background:#060a19;
-	width:100%;
-	height: 100%;
-	overflow:hidden;
-	font-family: Paytone One;
-}
-@mixin keyframes($animationName) {
-  @-webkit-keyframes #{"$animationName"} {
-    @content;
-  }
-  @-moz-keyframes #{$animationName} {
-    @content;
-  }
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
-  @-ms-keyframes #{$animationName} {
-    @content;
-  }
-
-  @keyframes #{$animationName} {
-    @content;
-  }
-}
-p {
-	color: #fff;
-	background: #000;
-	mix-blend-mode: lighten;
-	font-size:30px;
-	text-align: center;
-	position: absolute;
-	left:0;
-	right: 0;
-	top:0;
-	bottom: 0;
-	margin:auto;
-	height: 100px;
-	@include animation(filterHue2 2s linear infinite);
-
-	&::before {
-		content: '';
-		display: block;
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		background: #e23b4a; //fallback
-		@include background(linear-gradient(to right,#23966c, #faaa54, #e23b4a, #db0768, #360670));
-		pointer-events: none;
-		mix-blend-mode: multiply;
-	}
+html, body {
+  height: 100%;
+  margin: 0;
+  position: relative;
+  background: #222;
+  font-family: "Open Sans";
 }
 
-.loader-container {
-	width:100px;
-	height:100px;
-	position: absolute;
-	@include animation(scaleUp .5s linear);
-	@include transform(scale(0));
-	opacity: 0;
-	.loader {
-		background: #ff0c0c;
-		@include background(linear-gradient(50deg,#ff0c0c,#21d400));
-		border-radius:10px;
-		@include filter(hue-rotate(0deg));
-		animation: filterHue 2.5s linear infinite;
-		height:100%;
-		width: 100%;
-		transform:rotate(0deg);
-		&::after {
-			content:'';
-			position:absolute;
-			height: 80px;
-			width:80px;
-			left:10px;
-			top:10px;
-			border-radius: 100%;
-		}
-	}
+#wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
 }
 
-@include keyframes(filterHue2) {
-	50%{@include filter(hue-rotate(1000deg));}
-	100% {@include filter(hue-rotate(2000deg)); }
+#wrap p {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  color: rgba(255,255,255,.5);
+  font-size: 30px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  text-align: center;
 }
 
-@include keyframes(filterHue) {
-	50%{@include filter(hue-rotate(1000deg));}
-	100% {@include filter(hue-rotate(2000deg));
-	@include transform(rotate(360deg));}
-}
-@include keyframes(scaleUp) {
-	50%{@include transform(scale(0.5));opacity: 1}
-	100% {@include transform(scale(0.25));}
-}
-
-
-@supports (-ms-ime-align: auto) {
-  p {
-    color: #21d400;
-    background: transparent;
-    mix-blend-mode: lighten;
-    font-size: 30px;
-    text-align: center;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    height: 100px;
-    @include animation(filterHue2 2s linear infinite);
-  }
-  p::before {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: transparent;
-  }
+.ball {
+  pointer-events: none;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: gray;
+  animation: implode 1s ease-in-out;
+  animation-fill-mode: both;
+  opacity: .5;
 }
 
-
-@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-	p {
-		color: #ff447c;
-		background: transparent;
-		mix-blend-mode: lighten;
-		font-size: 30px;
-		text-align: center;
-		position: absolute;
-		left: 0;
-		right: 0;
-		top: 0;
-		bottom: 0;
-		margin: auto;
-		height: 100px;
-		@include animation(filterHue2 2s linear infinite);
-	}
-	p::before {
-		content: '';
-		display: block;
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		background: transparent;
-	}
-
-	.loader {
-		@include background(linear-gradient(50deg,rgba(240, 0, 80, 1),#2380ff) !important);
-	}
+@keyframes implode {
+  100% {transform: scale(0)}
 }
