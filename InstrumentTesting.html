@@ -8,23 +8,87 @@
 <body>
   <button type="button" name="button" id ="button" class = "button">Button</button>
   <script>
-  document.getElementById('button').addEventListener('click', function(){
-  	Gibber.init()
-  	
-  	a = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:ms(1000) })
- 	document.body.onkeydown = function(e){
+    document.getElementById('button').addEventListener('click', function(){
+    Gibber.init()
+    // [130, 164, 196], [146, 185, 220],
+    var numUsers = 3;
+    var notes = [[100, 500, 800], [120, 520, 820], [-1, -1, -1]];
+    var currentNotes = []
+
+    for(i = 0; i < numUsers;i++){
+        currentNotes.push(notes[i][0])
+    }
+    var prev = [-2, -2, -2]
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * Math.floor(max));
+    }
+    // console.log(notes[getRandomInt(3)])
+    a = FM('bass', { maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
+    b = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
+    c = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
+
+    var i = 0
+    function playNext() {
+        if(i < notes.length) { 
+            var rand_int = getRandomInt(3);
+            var rand_notes = notes[rand_int]
+            
+            console.log(notes[rand_int])
+            a.kill();
+            b.kill();
+            c.kill();
+
+            a = FM('bass', { maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
+            b = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
+            c = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
+
+            for(i = 0; i < numUsers;i++){
+                var temp
+               
+                if (rand_notes[i] == -1) {
+                    temp.kill()
+                    if(i == 0){
+                        a  = FM('bass', { maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
+                    }else if(i == 1){
+                        b = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
+                    }else{
+                        c = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
+                    }
+                    temp.note(prev[i], 0);    
+                } else if(rand_notes[i] == prev[i]){ 
+                
+                } else {
+                    temp.kill()
+                    if(i == 0){
+                        a  = FM('bass', { maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
+                    }else if(i == 1){
+                        b = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
+                    }else{
+                        c = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
+                    }
+                    temp.note(rand_notes[i]);
+                }
+                prev[i] = rand_notes[i]
+            }
+        } else {
+            clearInterval(loop)
+        }
+    }
+    var loop = window.setInterval(playNext, 200);
+       /*
+    bass = FM('bass')
+    document.body.onkeydown = function(e){
     if(e.keyCode == 13){
-    	var i = Mouse.X
+        var i = Mouse.X
         a.note(i, 1/4)
-        
+        b.note(i+100, 1/4)
+        bass.note(i+200, 1/4)
 
     }
-   
-}
-
+   */
   })
-  
- 
+
+
 
 
   </script>
