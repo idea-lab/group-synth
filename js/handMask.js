@@ -82,7 +82,7 @@ console.log('OpenCV.js is ready');
 initUI();
 startCamera();
 }
-
+    
 function getCenter(){
   hand = find_hand(src);
   return imgXYtoScrXY(width - bounds_center(hand)[0], bounds_center(hand)[1]);

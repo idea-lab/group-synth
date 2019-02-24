@@ -40,8 +40,9 @@ Gibber.init()
   // mousePos.y = -1;
   window.setInterval(function(){
       var center = getCenter();
-      handPos.x = center[0];
-      handPos.y = center[1];
+      var note = xyToFreqAmp(center[0], center[1]);
+      handPos.x = note[0];
+      handPos.y = note[1];
 
     if(Math.floor(new Date().getTime()) > time && firebaseUpdate){
       firebase.database().ref('session92103/' + currentUser.displayName).push({
