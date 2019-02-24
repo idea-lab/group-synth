@@ -35,18 +35,18 @@ Gibber.init()
   firebase.database().ref('session92103/startTime').set(Math.floor(new Date().getTime())+5000);
   onStart();
   $("#instructions").text("move your mouse");
-  mousePos = {x: -1, y: -1};
+  handPos = {x: -1, y: -1};
   // mousePos.x = -1;
   // mousePos.y = -1;
   window.setInterval(function(){
-    $(window).mousemove(function (e) {
-      mousePos.x = e.pageX;
-      mousePos.y = e.pageY;
-    });
+      var center = getCenter();
+      handPos.x = center[0];
+      handPos.y = center[1];
+
     if(Math.floor(new Date().getTime()) > time && firebaseUpdate){
       firebase.database().ref('session92103/' + currentUser.displayName).push({
-        'x': mousePos.x,
-        'y': mousePos.y
+        'x': handPos.x,
+        'y': handPos.y
       });
       notes = [-1,-1,-1];
       vol = [-1, -1, -1];
