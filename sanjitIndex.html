@@ -9,32 +9,32 @@
 <body id = "body">
   <p>move your mouse</p>
   <script>
-//   window.addEventListener("mousemove", function (e) {
-//
-//   var to_append = document.getElementsByClassName('loader-container')[0];
-//   var all = document.getElementsByClassName('loader-container');
-//
-//   var parent_div = document.createElement('div');
-//   parent_div.className = "loader-container";
-//   var inner_div = document.createElement('div');
-//   inner_div.className = "loader";
-//   parent_div.appendChild(inner_div)
-//   var d = document.body.appendChild(parent_div);
-//
-//   parent_div.style.left = (e.clientX - 50)+'px';
-//   parent_div.style.top = (e.clientY - 50)+'px';
-//
-//   if(document.getElementsByClassName('loader-container').length > 50) {
-//     document.body.removeChild(to_append)
-//   }
-// });
   document.getElementById('body').addEventListener('click', function(){
-  Gibber.init()
-    c = Sine(879, 0.78);
+  Gibber.init();
+  a = Sine(200, 0.6);
+  b = Sine(400, 0.6);
+  c = Sine(600, 0.6);
+  d = Sine(800, 0.6);
+
+  var a_vals = [200, 220, 240, 260, 280, 300];
+  var b_vals = [400, 420, 440, 460, 480, 500];
+  var c_vals = [600, 620, 640, 660, 680, 700];
+  var d_vals = [800, 820, 840, 860, 880, 900];
+
+  // loop through arrays pretending that it represents updates
+  var i = 0;
   window.setInterval(function(){
-    c.frequency = Add(220, Sine(.1, 110)._)
-    // console.log(event.clientX/window.innerWidth * 1000 + ": " + event.clientY/window.innerHeight);
-  }, 10);
+    a.kill();
+    b.kill();
+    c.kill();
+    d.kill();
+
+    a = Sine(a_vals[i], 0.6);
+    b = Sine(b_vals[i], 0.6);
+    c = Sine(c_vals[i], 0.6);
+    d = Sine(d_vals[i], 0.6);
+    i++;
+  }, 1000);
   });
 
 
