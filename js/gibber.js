@@ -29,8 +29,8 @@ function doStuff() {
   $("#instructions").text("move your mouse");
   c = Sine(Mouse.x, Mouse.y);
   mousePos = {};
-  mousePos.x = -1;
-  mousePos.y = -1;
+  // mousePos.x = -1;
+  // mousePos.y = -1;
   window.setInterval(function(){
     if(Math.floor(new Date().getTime())%1000 == 0 && firebaseUpdate){
       $(window).mousemove(function (e) {
