@@ -5,11 +5,12 @@ function onStart(){
  function getRandomInt(min, max) {
    return Math.round(Math.random() * (max - min + 1)) + min;
  }
-
-  $(window).mousemove(function(e) {
-    mousePos.x = e.pageX;
-    mousePos.y = e.pageY;
-  });
+ window.setInterval(function(){
+   var center = getCenter();
+   mousePos.x = center[0];
+   mousePos.y = center[1];
+   // console.log(event.clientX/window.innerWidth * 1000 + ": " + event.clientY/window.innerHeight);
+ }, 10);
 
   $(window).mouseleave(function(e) {
     mousePos.x = -1;
@@ -19,7 +20,7 @@ function onStart(){
   var draw = setInterval(function(){
     if(mousePos.x > 0 && mousePos.y > 0){
 
-      var range = 15;
+      var range = 30;
 
       var color = "background: rgb("+getRandomInt(0,255)+","+getRandomInt(0,255)+","+getRandomInt(0,255)+");";
 
