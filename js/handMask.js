@@ -54,8 +54,8 @@ function processVideo() {
   cv.rectangle(src, handMin, handMax, new cv.Scalar(255, 0, 0), 2, cv.LINE_AA, 0);
   var handCenter = getCenter();
   var sound = xyToFreqAmp(handCenter[0], handCenter[1]);
-  noteInfo.innerHTML = "Frequency: " + sound[0] + "Amplitude: " + sound[1];
-  console.log(sound);
+  //noteInfo.innerHTML = "Frequency: " + sound[0] + "Amplitude: " + sound[1];
+  // console.log(sound);
   //cv.imshow("canvasOutput", src);
   requestAnimationFrame(processVideo);
 }
@@ -99,7 +99,7 @@ function imgXYtoScrXY(x, y)
 {
   var scrX = x * window.innerWidth / width;
   var scrY = y * window.innerHeight / height;
- 
+
   return [scrX, scrY];
 }
 

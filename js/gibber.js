@@ -2,9 +2,12 @@ var currentUser;
 var firebaseUpdate;
 var c;
 var time;
-Gibber.init()
+$( document ).ready(function() {
+
+});
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
+
       currentUser = user;
     }else{
       window.location("./login.html", "_self");
@@ -22,16 +25,17 @@ firebase.auth().onAuthStateChanged(function(user) {
     time = snap.val();
   });
 document.getElementById('body').addEventListener('click', function(){
+
   firebaseUpdate = !firebaseUpdate;
   firebase.database().ref('session92103/status').once('value', function(snap){
       firebase.database().ref('session92103/status').set(!snap.val());
   });
 });
 function doStuff() {
+Gibber.init()
   firebase.database().ref('session92103/startTime').set(Math.floor(new Date().getTime())+5000);
   onStart();
   $("#instructions").text("move your mouse");
-  c = Sine(Mouse.x, Mouse.y);
   mousePos = {x: -1, y: -1};
   // mousePos.x = -1;
   // mousePos.y = -1;
