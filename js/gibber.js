@@ -71,7 +71,9 @@ Gibber.init()
       var c = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
         var numUsers = 3
     console.log("hi")
-      for (i = 0; i < numUsers; i++) {
+	document.body.onkeydown = function(e){
+    if(e.keyCode == 32){
+        for (i = 0; i < numUsers; i++) {
        if (notes[i] != prev[i]) {
           prev[i] = notes[i]
           if (i == 0) {a.kill(); console.log("a");}
@@ -96,6 +98,9 @@ Gibber.init()
           }
         }
       }
+    }
+}
+      
       console.log("Hi")
             });
           });
