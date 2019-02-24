@@ -69,7 +69,7 @@ Gibber.init()
       b = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
       c = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
         var numUsers = 3
-
+    console.log("hi")
       var i = 0
       for (i = 0; i < numUsers; i++) {
        if (notes[i] != prev[i]) {
@@ -93,6 +93,7 @@ Gibber.init()
           }
         }
       }
+      console.log("Hi")
             });
           });
         });
