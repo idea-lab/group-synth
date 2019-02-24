@@ -45,38 +45,27 @@ function doStuff() {
         'x': mousePos.x,
         'y': mousePos.y
       });
-      freq = [-1,-1,-1];
+      notes = [-1,-1,-1];
       vol = [-1, -1, -1];
     firebase.database().ref('session92103/user1').limitToLast(1).once('value', function(snap){
       snap.forEach(function(snapshot){
-        freq[0] = snapshot.val().x;
+        notes[0] = snapshot.val().x;
         vol[0] = snapshot.val().y;
         firebase.database().ref('session92103/user2').limitToLast(1).once('value', function(snap){
           snap.forEach(function(snapshot){
-            freq[1] = snapshot.val().x;
+            notes[1] = snapshot.val().x;
             vol[1] = snapshot.val().y;
             firebase.database().ref('session92103/user3').limitToLast(1).once('value', function(snap){
               snap.forEach(function(snapshot){
-                freq[2] = snapshot.val().x;
+                notes[2] = snapshot.val().x;
                 vol[2] = snapshot.val().y;
               });
-              console.log(freq);
-			  soundGeneration(3, freq)
-            });
-          });
-        });
-      });
-    });
-    }
-}, 1000);
-}
-
-
- function soundGeneration(numUsers, notes){
-      var prev = [-2, -2, -2]
+              console.log(notes);
+			  var prev = [-2, -2, -2]
       a = FM('bass', { maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
       b = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
       c = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
+        var numUsers = 3
 
       var i = 0
       for (i = 0; i < numUsers; i++) {
@@ -101,7 +90,17 @@ function doStuff() {
           }
         }
       }
-  }
+            });
+          });
+        });
+      });
+    });
+    }
+}, 1000);
+}
+
+
+=
 /*
 syncing
 
