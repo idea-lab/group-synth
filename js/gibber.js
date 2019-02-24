@@ -40,8 +40,7 @@ function doStuff() {
 
       firebase.database().ref('session92103/' + currentUser.displayName).push({
          'x' : mousePos.x,
-         'y' : mousePos.y,
-         'time': Math.floor(new Date().getTime())
+         'y' : mousePos.y
       })
       // console.log(event.clientX/window.innerWidth * 1000 + ": " + event.clientY/window.innerHeight);
     }
