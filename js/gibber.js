@@ -66,15 +66,15 @@ Gibber.init()
               });
               console.log(notes);
 			  var prev = [-2, -2, -2]
-      a = FM('bass', { maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
-      b = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
-      c = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
+      var a = FM('bass', { maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
+      var b = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
+      var c = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
         var numUsers = 3
     console.log("hi")
       for (i = 0; i < numUsers; i++) {
        if (notes[i] != prev[i]) {
           prev[i] = notes[i]
-          if (i == 0) {a.kill()}
+          if (i == 0) {a.kill(); console.log("a");}
           if (i == 1) {b.kill()}
           if (i == 2) {c.kill()}
           if (notes[i] != -1) {
