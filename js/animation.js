@@ -20,7 +20,7 @@ function onStart(){
   var draw = setInterval(function(){
     if(mousePos.x > 0 && mousePos.y > 0){
 
-      var range = 15;
+      var range = 30;
 
       var color = "background: rgb("+getRandomInt(0,255)+","+getRandomInt(0,255)+","+getRandomInt(0,255)+");";
 

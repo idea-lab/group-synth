@@ -1,5 +1,5 @@
 // In this case, We set width 320, and the height will be computed based on the input stream.
-let width = 600;
+let width = 720;
 let height = 0;
 
 // whether streaming video from the camera.
@@ -51,8 +51,11 @@ function processVideo() {
   var handMin = new cv.Point(hand[0], hand[1]);
   var handMax = new cv.Point(hand[2], hand[3]);
   cv.rectangle(src, handMin, handMax, new cv.Scalar(255, 0, 0), 2, cv.LINE_AA, 0);
-  var handCenter = bounds_center(hand);
-  console.log(handCenter);
+  var handCenter = getCenter();
+  var sound = xyToFreqAmp(handCenter[0], handCenter[1]);
+  var s = Sine(sound[0], sound[1]);
+  s.play([sound[0]]);
+  console.log(sound);
   //cv.imshow("canvasOutput", src);
   requestAnimationFrame(processVideo);
 }
@@ -82,13 +85,21 @@ startCamera();
 
 function getCenter(){
   hand = find_hand(src);
-  return imgXYtoScrXY(bounds_center(hand)[0], bounds_center(hand)[1]);
+  return imgXYtoScrXY(width - bounds_center(hand)[0], bounds_center(hand)[1]);
+}
+
+function xyToFreqAmp(x, y)
+{
+	var freq = x * (3200-50) / window.innerWidth + 50;
+	var amp = y / window.innerHeight;
+	return [freq, amp];
 }
 
 function imgXYtoScrXY(x, y)
 {
   var scrX = x * window.innerWidth / width;
   var scrY = y * window.innerHeight / height;
+ 
   return [scrX, scrY];
 }
 
