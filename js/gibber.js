@@ -61,6 +61,7 @@ function doStuff() {
                 vol[2] = snapshot.val().y;
               });
               console.log(freq);
+			  soundGeneration(3, freq)
             });
           });
         });
@@ -69,6 +70,38 @@ function doStuff() {
     }
 }, 1000);
 }
+
+
+ function soundGeneration(numUsers, notes){
+      var prev = [-2, -2, -2]
+      a = FM('bass', { maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
+      b = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
+      c = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
+
+      var i = 0
+      for (i = 0; i < numUsers; i++) {
+       if (notes[i] != prev[i]) {
+          prev[i] = notes[i]
+          if (i == 0) {a.kill()}
+          if (i == 1) {b.kill()}
+          if (i == 2) {c.kill()}
+          if (notes[i] != -1) {
+              if (i == 0) {
+                  a = FM('bass', { maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
+                  a.note(notes[i], 1);
+              }
+              if (i == 1) {
+                  b = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
+                  b.note(notes[i], 0.7);
+              }
+              if (i == 2) {
+                  c = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
+                  c.note(notes[i], 0.7);
+              }
+          }
+        }
+      }
+  }
 /*
 syncing
 

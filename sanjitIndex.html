@@ -9,49 +9,37 @@
   <button type="button" name="button" id ="button" class = "button">Button</button>
   <script>
     document.getElementById('button').addEventListener('click', function(){
-    Gibber.init()
-    // [130, 164, 196], [146, 185, 220],
-    var numUsers = 3;
-    var notes = [[100, 500, 800], [120, 520, 820], [-1, -1, -1]];
-    var prev = [-2, -2, -2]
-    function getRandomInt(max) {
-        return Math.floor(Math.random() * Math.floor(max));
-    }
-    // console.log(notes[getRandomInt(3)])
-    a = FM('bass', { maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
-    b = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
-    c = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
 
-    var i = 0
-    function playNext() {
-        var rand_int = getRandomInt(3);
-        var rand_notes = notes[rand_int]
-        console.log(notes[rand_int])
+    function soundGeneration(numUsers, notes){
+      var prev = [-2, -2, -2]
+      a = FM('bass', { maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
+      b = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
+      c = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
 
-        for (i = 0; i < numUsers; i++) {
-             if (rand_notes[i] != prev[i]) {
-                prev[i] = rand_notes[i]
-                if (i == 0) {a.kill()}
-                if (i == 1) {b.kill()}
-                if (i == 2) {c.kill()}
-                if (rand_notes[i] != -1) {
-                    if (i == 0) {
-                        a = FM('bass', { maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
-                        a.note(rand_notes[i], 1);
-                    }
-                    if (i == 1) {
-                        b = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
-                        b.note(rand_notes[i], 1);
-                    }
-                    if (i == 2) {
-                        c = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
-                        c.note(rand_notes[i], 1);
-                    }
-                }
-            }
+      var i = 0
+      for (i = 0; i < numUsers; i++) {
+       if (notes[i] != prev[i]) {
+          prev[i] = notes[i]
+          if (i == 0) {a.kill()}
+          if (i == 1) {b.kill()}
+          if (i == 2) {c.kill()}
+          if (notes[i] != -1) {
+              if (i == 0) {
+                  a = FM('bass', { maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
+                  a.note(notes[i], 1);
+              }
+              if (i == 1) {
+                  b = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
+                  b.note(notes[i], 0.7);
+              }
+              if (i == 2) {
+                  c = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
+                  c.note(notes[i], 0.7);
+              }
+          }
         }
-    }
-    var loop = window.setInterval(playNext, 200);
+      }
+  }
   })
 
   </script>
