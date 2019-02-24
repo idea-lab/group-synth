@@ -8,7 +8,7 @@ let streaming = false;
 let video = document.getElementById("video");
 let stream = null;
 let vc = null;
-let noteInfo = document.getElementById("note");
+//let noteInfo = document.getElementById("note");
 
 function startCamera() {
 if (streaming) return;
@@ -54,7 +54,7 @@ function processVideo() {
   cv.rectangle(src, handMin, handMax, new cv.Scalar(255, 0, 0), 2, cv.LINE_AA, 0);
   var handCenter = getCenter();
   var sound = xyToFreqAmp(handCenter[0], handCenter[1]);
-  noteInfo.innerHTML = "Frequency: " + sound[0] + "Amplitude: " + sound[1];
+  //noteInfo.innerHTML = "Frequency: " + sound[0] + "Amplitude: " + sound[1];
   console.log(sound);
   //cv.imshow("canvasOutput", src);
   requestAnimationFrame(processVideo);
