@@ -28,6 +28,7 @@ document.getElementById('body').addEventListener('click', function(){
   });
 });
 function doStuff() {
+  firebase.database().ref('session92103/startTime').set(Math.floor(new Date().getTime())+5000);
   onStart();
   $("#instructions").text("move your mouse");
   c = Sine(Mouse.x, Mouse.y);
@@ -47,17 +48,6 @@ function doStuff() {
       // console.log(event.clientX/window.innerWidth * 1000 + ": " + event.clientY/window.innerHeight);
     }
 }, 1000);
-}
-
-
-function myTimer() {
-  var d = new Date();
-  var t = d.toLocaleTimeString();
-  document.getElementById("demo").innerHTML = t;
-}
-
-function myStopFunction() {
-  clearInterval(myVar);
 }
 /*
 syncing
