@@ -9,14 +9,22 @@
   <button type="button" name="button" id ="button" class = "button">Button</button>
   <script>
   document.getElementById('button').addEventListener('click', function(){
-  Gibber.init()
+  	Gibber.init()
+  	
+  	a = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:ms(1000) })
+ 	document.body.onkeydown = function(e){
+    if(e.keyCode == 13){
+    	var i = Mouse.X
+        a.note(i, 1/4)
+        
+
+    }
+   
+}
+
   })
-  //console.log(Mouse.x)
-  a = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:ms(1000) })
   
-  a.play( Mouse.x.value, 1/2 )
-
-
+ 
 
 
   </script>
