@@ -25,7 +25,6 @@ firebase.auth().onAuthStateChanged(function(user) {
     time = snap.val();
   });
 document.getElementById('body').addEventListener('click', function(){
-
   firebaseUpdate = !firebaseUpdate;
   firebase.database().ref('session92103/status').once('value', function(snap){
       firebase.database().ref('session92103/status').set(!snap.val());
@@ -102,9 +101,6 @@ Gibber.init()
     }
 }, 1000);
 }
-
-
-=
 /*
 syncing
 
