@@ -52,7 +52,7 @@ function get_bounds_rotation(current, old)
     deltaSideOld = bounds_width(old) - bounds_height(old);
 
     if (deltaSide > 0 && deltaSideOld < 0)
-	{	
+	{
         if (Math.abs(deltaXMax) > Math.abs(deltaXMin))
             return FLAG_ROT_LEFT;
         if (Math.abs(deltaXMin) > Math.abs(deltaXMax))
@@ -68,7 +68,7 @@ function get_bounds_rotation(current, old)
 
     return FLAG_NONE;
 }
-function find_hand(image, mask)
+function find_hand(image)
 {
 	var imgHSV = new cv.Mat();
 	cv.cvtColor(image, imgHSV, cv.COLOR_RGB2HSV, 0);
@@ -77,16 +77,16 @@ function find_hand(image, mask)
 	colorMax[3] = 255;
 	var minMat = new cv.Mat(imgHSV.rows, imgHSV.cols, imgHSV.type(), colorMin);
 	var maxMat = new cv.Mat(imgHSV.rows, imgHSV.cols, imgHSV.type(), colorMax);
-	//mask = new cv.Mat();
+	var mask = new cv.Mat();
     cv.inRange(imgHSV, minMat, maxMat, mask);
     //mask = cv2.blur(mask, (3, 3));
     //status, mask = cv2.threshold(mask, 200, 255, cv2.THRESH_BINARY);
 	var contours = new cv.MatVector();
 	var harch = new cv.Mat();
-	
+
 	cv.findContours(mask, contours, harch, Number(cv.RETR_COMP), Number(cv.CHAIN_APPROX_SIMPLE));
     var handContour = [];
-	
+
 	if (contours.size() > 0)
 	{
 		var maxIdx = 0;
@@ -99,26 +99,28 @@ function find_hand(image, mask)
 				maxIdx = i;
 			}
 		}
-		
+
 		handContour = contours.get(maxIdx);
-		
+
 		if (handContour.rows > 0)
 		{
 			rc = cv.boundingRect(handContour);
-			
+
 			minMat.delete();
 			maxMat.delete();
 			imgHSV.delete();
 			contours.delete();
 			harch.delete();
+      mask.delete();
 			return make_bounds(rc.x, rc.y, rc.width, rc.height);
 		}
 	}
-	
+
 	minMat.delete();
 	maxMat.delete();
 	imgHSV.delete();
 	contours.delete();
 	harch.delete();
+  mask.delete();
 	return null;
 }

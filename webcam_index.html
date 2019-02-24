@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <body>
-	<video id = "video"></video>
+	<video id = "video" style ="display:none;"></video>
 	<canvas id = "canvasOutput"></canvas>
 </body>
 <script src = "opencv.js"></script>
@@ -44,7 +44,7 @@
 
 	let lastFilter = '';
 	let src = null;
-	let dstC1 = null;	
+	let dstC1 = null;
 	let dstC3 = null;
 	let dstC4 = null;
 
@@ -63,10 +63,11 @@
 		cv.rectangle(src, handMin, handMax, new cv.Scalar(255, 0, 0), 2, cv.LINE_AA, 0);
 		var handCenter = bounds_center(hand);
 		console.log(handCenter);
-		cv.imshow("canvasOutput", src);
+		//cv.imshow("canvasOutput", src);
 		requestAnimationFrame(processVideo);
 		mask.delete();
 	}
+
 
 	function stopVideoProcessing() {
 	if (src != null && !src.isDeleted()) src.delete();
@@ -90,8 +91,8 @@
 	initUI();
 	startCamera();
 	}
-	
-	
+
+
 	startCamera();
 </script>
 </html>
