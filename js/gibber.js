@@ -6,7 +6,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       currentUser = user;
     }else{
-      window.location("./login.html", "_self");
+      window.open("./login.html", "_self");
     }
   });
   firebase.database().ref('session92103/status').on('value', function(snap){
