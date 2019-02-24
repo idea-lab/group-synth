@@ -79,15 +79,15 @@ Gibber.init()
           if (i == 2) {c.kill()}
           if (notes[i] != -1) {
               if (i == 0) {
-                  a = FM('bass', { maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
+                  a = FM('bass', { maxVoices:4, waveform:'PWM', attack:ms(1), decay:1000});
                   a.note(notes[i], 1);
               }
               if (i == 1) {
-                  b = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
+                  b = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:1000 });
                   b.note(notes[i], 0.7);
               }
               if (i == 2) {
-                  c = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
+                  c = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:1000});
                   c.note(notes[i], 0.7);
               }
           }

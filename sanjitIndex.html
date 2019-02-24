@@ -10,7 +10,6 @@
   <script>
     document.getElementById('button').addEventListener('click', function(){
 
-    function soundGeneration(numUsers, notes){
       var prev = [-2, -2, -2]
       a = FM('bass', { maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
       b = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:23 });
@@ -39,7 +38,7 @@
           }
         }
       }
-  }
+
   })
 
   </script>
