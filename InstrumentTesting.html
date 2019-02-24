@@ -1,0 +1,25 @@
+<html>
+
+<head>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js'></script>
+  <script src='./build/gibber.lib.js'></script>
+</head>
+
+<body>
+  <button type="button" name="button" id ="button" class = "button">Button</button>
+  <script>
+  document.getElementById('button').addEventListener('click', function(){
+  Gibber.init()
+  })
+  //console.log(Mouse.x)
+  a = Synth({ maxVoices:4, waveform:'PWM', attack:ms(1), decay:ms(1000) })
+  
+  a.play( Mouse.x.value, 1/2 )
+
+
+
+
+  </script>
+</body>
+
+</html>
